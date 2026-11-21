@@ -1,0 +1,55 @@
+{
+  "positive_words": [
+    "excellent", "outstanding", "brilliant", "exceptional", "strong",
+    "dedicated", "consistent", "good", "great", "impressive",
+    "active", "creative", "thorough", "reliable", "improvement",
+    "leader", "mastery", "best", "recommended", "top",
+    "hardworking", "diligent", "motivated", "enthusiastic", "capable",
+    "talented", "promising", "proactive", "remarkable", "superb"
+  ],
+  "negative_words": [
+    "poor", "weak", "struggles", "lacking", "concerning",
+    "absent", "inconsistent", "below", "needs", "fails",
+    "minimal", "rarely", "chronic", "serious", "intervention",
+    "careless", "unmotivated", "disengaged", "insufficient", "unsatisfactory",
+    "deteriorating", "declining", "problematic", "deficient", "negligent"
+  ],
+  "sample_feedbacks": [
+    {
+      "label": "positive",
+      "text": "Excellent performance throughout the semester. Shows deep understanding and creativity."
+    },
+    {
+      "label": "positive",
+      "text": "Very dedicated student with strong analytical skills. Active in class participation."
+    },
+    {
+      "label": "positive",
+      "text": "Consistently good work. Demonstrates mastery of concepts and helps peers."
+    },
+    {
+      "label": "negative",
+      "text": "Very poor attendance and no effort in assignments. Needs immediate intervention."
+    },
+    {
+      "label": "negative",
+      "text": "Struggles significantly with coursework. Rarely attends and shows no improvement."
+    },
+    {
+      "label": "negative",
+      "text": "Weak performance overall. Lacks motivation and needs serious counseling."
+    },
+    {
+      "label": "mixed",
+      "text": "Shows potential but very inconsistent. Good in assignments but poor exam performance."
+    },
+    {
+      "label": "mixed",
+      "text": "Average student with room for improvement. Decent attendance but weak in practicals."
+    },
+    {
+      "label": "mixed",
+      "text": "Has capability but needs more dedication. Sometimes shows effort but lacks consistency."
+    }
+  ]
+}

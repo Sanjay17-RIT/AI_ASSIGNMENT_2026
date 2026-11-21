@@ -1,0 +1,51 @@
+student_id,name,attendance,internal_marks,assignments_completed,study_hours_per_week,previous_gpa,lab_score,teacher_feedback,result
+1,Aarav Sharma,92,42,9,20,8.5,27,"Excellent performance. Very consistent in assignments and shows deep understanding of concepts. A role model for peers.",High
+2,Priya Patel,88,38,8,18,7.8,25,"Good student with strong analytical skills. Participates actively in class discussions and helps classmates.",High
+3,Rohan Gupta,95,45,10,22,9.2,28,"Outstanding student. Demonstrates exceptional understanding and creativity in problem solving. Highly recommended.",High
+4,Ananya Singh,85,36,8,16,7.5,24,"Consistently performs well. Shows good effort in both theory and practical sessions.",High
+5,Vikram Reddy,90,40,9,19,8.0,26,"Very dedicated student. Excellent lab work and thorough understanding of fundamentals.",High
+6,Sneha Iyer,78,32,7,14,6.8,20,"Good performance overall. Could improve in lab sessions but theory understanding is solid.",Pass
+7,Karthik Nair,75,28,7,12,6.5,19,"Shows potential but needs to be more consistent. Attendance is acceptable but could be better.",Pass
+8,Meera Krishnan,72,30,6,11,6.2,18,"Average student with room for improvement. Needs to focus more on practical applications.",Pass
+9,Arjun Menon,80,34,8,15,7.0,21,"Decent performance. Good in assignments but needs to improve exam preparation strategies.",Pass
+10,Divya Rao,70,26,6,10,5.8,17,"Shows some effort but inconsistent. Needs to develop better study habits and time management.",Pass
+11,Rahul Kumar,68,24,5,9,5.5,16,"Average performer. Struggles with complex topics but manages to pass. Needs additional support.",Pass
+12,Pooja Desai,82,35,8,16,7.2,22,"Good student who works hard. Sometimes makes careless mistakes in exams but understands concepts well.",Pass
+13,Suresh Babu,74,27,6,10,6.0,18,"Moderate performance. Needs to participate more in class and improve lab skills.",Pass
+14,Lakshmi Venkat,76,29,7,13,6.4,19,"Satisfactory performance. Shows improvement over the semester. Keep up the good work.",Pass
+15,Amit Joshi,71,25,5,8,5.6,15,"Needs significant improvement in study habits. Has potential but does not utilize it fully.",Pass
+16,Deepa Murthy,45,15,3,4,3.8,8,"Struggles significantly with the coursework. Very poor attendance is affecting performance. Needs immediate intervention.",Fail
+17,Rajesh Shetty,38,12,2,3,3.2,7,"Very weak performance. Rarely attends class and does not submit assignments on time. At risk of failing.",Fail
+18,Kavitha Gowda,42,14,3,5,4.0,9,"Shows minimal effort. Needs to take academics more seriously. Recommend counseling session.",Fail
+19,Manoj Hegde,50,18,4,6,4.5,11,"Below average performance. Attendance issues and lack of engagement in class activities.",Fail
+20,Swathi Kulkarni,35,10,2,2,2.8,6,"Extremely poor performance. Does not attend classes regularly and shows no interest in improvement.",Fail
+21,Nikhil Rao,55,20,4,7,4.8,12,"Borderline student. Sometimes shows effort but very inconsistent. Needs structured mentoring.",Fail
+22,Rashmi Bhat,48,16,3,5,4.2,10,"Struggles with both theory and practical. Needs fundamental concept revision and regular attendance.",Fail
+23,Arun Prasad,91,41,9,21,8.8,27,"Brilliant student with exceptional problem-solving abilities. Always ahead of the class.",High
+24,Nisha Agarwal,87,37,8,17,7.6,24,"Very good student. Strong in theory and shows leadership in group projects.",High
+25,Siddharth Jain,93,44,10,23,9.0,29,"Top performer. Research-oriented mindset and excellent grasp of advanced topics.",High
+26,Ritu Sharma,65,22,5,8,5.2,14,"Needs improvement in multiple areas. Attendance is concerning and exam scores are below average.",Fail
+27,Pranav Kulkarni,77,31,7,13,6.6,20,"Shows promise but needs to push harder. Good attendance but exam performance needs work.",Pass
+28,Anjali Mehta,83,33,7,14,7.1,21,"Reliable student. Consistent performance across all assessments. Could aim higher.",Pass
+29,Gaurav Singh,60,19,4,6,4.9,13,"Struggling student. Needs to improve attendance and dedicate more time to studies.",Fail
+30,Tanvi Deshmukh,79,30,7,12,6.7,19,"Good effort shown throughout the semester. Slight improvement needed in lab performance.",Pass
+31,Varun Nayak,86,36,8,17,7.4,23,"Strong performer. Active in class and shows genuine interest in the subject matter.",High
+32,Shruti Patil,73,26,6,10,5.9,16,"Average performance. Needs to be more proactive in seeking help when struggling with topics.",Pass
+33,Abhishek Reddy,40,13,2,3,3.5,7,"Very poor performance. Chronic absenteeism and no effort in assignments. Parents need to be contacted.",Fail
+34,Megha Srinivas,81,34,8,15,7.0,22,"Good student with consistent effort. Shows improvement in lab sessions over the semester.",Pass
+35,Harish Gowda,69,23,5,8,5.4,15,"Below average but showing some signs of improvement. Needs continued support and motivation.",Pass
+36,Revathi Subramaniam,94,43,10,22,9.1,28,"Exceptional student. Demonstrates mastery of all concepts and helps peers understand difficult topics.",High
+37,Naveen Kumar,58,17,4,5,4.6,11,"Weak performance. Needs to fundamentally change approach to studies. Consider remedial sessions.",Fail
+38,Bhavana Hegde,76,29,6,11,6.3,18,"Satisfactory work. Consistent but not outstanding. Has potential to do much better with more effort.",Pass
+39,Sachin Prabhu,84,35,8,16,7.3,23,"Very good student. Performs well in both theory and practical components. Keep it up.",High
+40,Divya Shetty,67,21,5,7,5.1,14,"Needs improvement. Shows interest occasionally but lacks consistency and discipline.",Fail
+41,Aditya Verma,89,39,9,19,8.2,26,"Excellent all-round performance. Strong analytical skills and very good practical understanding.",High
+42,Namrata Joshi,74,28,6,11,6.1,17,"Average performer with potential. Needs to improve time management and exam preparation.",Pass
+43,Vishal Patil,52,16,3,5,4.3,10,"Poor performance overall. Attendance and assignment completion are major concerns.",Fail
+44,Ashwini Kamath,80,32,7,14,6.9,20,"Good student. Shows steady improvement. Needs to maintain momentum in coming semesters.",Pass
+45,Pranith Rao,96,46,10,24,9.5,30,"Outstanding in every aspect. Best student in the class. Recommended for advanced research opportunities.",High
+46,Keerthi Bhat,71,25,6,9,5.7,16,"Moderate performance. Has capability but needs more dedication and regular study schedule.",Pass
+47,Sumanth Hegde,63,20,4,7,5.0,13,"Below expectations. Needs to improve in all areas. Recommend study group participation.",Fail
+48,Rashmi Nair,78,31,7,13,6.6,19,"Decent performance. Good practical skills but needs improvement in theoretical understanding.",Pass
+49,Ajay Sharma,44,14,3,4,3.9,9,"Very poor. Lacks motivation and rarely engages with course material. Needs serious intervention.",Fail
+50,Sowmya Iyengar,85,37,8,16,7.4,24,"Good student with strong fundamentals. Active participant in discussions and group activities.",High
