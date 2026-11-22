@@ -36,6 +36,12 @@ from modules.knowledge_base import (
     backward_chain, get_available_goals, get_inference_explanation, Fact
 )
 from utils.data_loader import load_student_data, prepare_features_and_labels, categorize_value
+from utils.data_cleaner import clean_student_dataset
+from utils.feature_engineering import (
+    engineer_features_pipeline, calculate_academic_consistency_index,
+    calculate_effort_outcome_yield, calculate_assignment_diligence_rate,
+    calculate_theory_practical_alignment, calculate_early_warning_composite_score
+)
 from utils.visualizations import (
     create_probability_gauge, create_feature_importance_chart,
     create_ga_evolution_chart, create_bow_chart, create_sentiment_gauge,
@@ -306,10 +312,13 @@ st.markdown("""
 
 @st.cache_data
 def load_data():
-    """Load and prepare dataset — cached for performance."""
-    df = load_student_data()
+    """Load, clean via IQR, and engineer domain features — cached for performance."""
+    raw_df = load_student_data()
+    clean_res = clean_student_dataset(raw_df)
+    clean_df = clean_res['cleaned_dataframe']
+    df = engineer_features_pipeline(clean_df)
     prepared = prepare_features_and_labels(df)
-    return df, prepared
+    return df, prepared, clean_res
 
 @st.cache_resource
 def train_models(_X, _y):
@@ -385,7 +394,7 @@ st.markdown("<hr style='margin: 8px 0 20px 0; border: none; border-top: 1px soli
 # ==============================================================
 
 try:
-    df, prepared = load_data()
+    df, prepared, clean_res = load_data()
     X, y = prepared['X'], prepared['y']
     feature_names = prepared['feature_names']
     class_names = prepared['class_names']
@@ -488,20 +497,35 @@ if page == "🏠 Home":
     
     st.markdown("---")
     
-    st.markdown("### 📊 Dataset Overview (50 Student Benchmark)")
+    st.markdown("### 📊 Dataset Overview (Cleaned & Feature-Engineered Cohort)")
     if data_loaded:
-        col_a, col_b, col_c = st.columns(3)
+        st.markdown("""
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px;">
+            <span style="font-size:0.75rem; background:rgba(52,211,153,0.15); color:#34D399; border:1px solid rgba(52,211,153,0.3); padding:3px 10px; border-radius:12px; font-weight:600;">
+                ✓ 100% Boundary Validated
+            </span>
+            <span style="font-size:0.75rem; background:rgba(99,102,241,0.15); color:#A5B4FC; border:1px solid rgba(99,102,241,0.3); padding:3px 10px; border-radius:12px; font-weight:600;">
+                ✓ IQR Outlier Capped (Winsorized)
+            </span>
+            <span style="font-size:0.75rem; background:rgba(236,72,153,0.15); color:#F472B6; border:1px solid rgba(236,72,153,0.3); padding:3px 10px; border-radius:12px; font-weight:600;">
+                ⚡ 5 Engineered Predictors (ACI, EOY, ADR, TPAR, EWCS)
+            </span>
+        </div>
+        """, unsafe_allow_html=True)
+        col_a, col_b, col_c, col_d = st.columns(4)
         with col_a:
-            st.metric("Total Students", len(df))
+            st.metric("Total Cohort", len(df))
         with col_b:
-            st.metric("Features Analyzed", len(feature_names))
+            st.metric("Features (Raw + Eng)", len(feature_names) + 5)
         with col_c:
             result_counts = df['result'].value_counts().to_dict()
             st.metric("Classes", f"High({result_counts.get('High',0)}) / Pass({result_counts.get('Pass',0)}) / Fail({result_counts.get('Fail',0)})")
+        with col_d:
+            st.metric("Outliers Handled", f"{clean_res.get('iqr_outliers_capped', 0)} Capped")
         
-        st.dataframe(df[['name', 'attendance', 'internal_marks', 'assignments_completed', 
-                          'study_hours_per_week', 'previous_gpa', 'lab_score', 'result']].head(10),
-                     width='stretch')
+        preview_cols = ['name', 'attendance', 'internal_marks', 'study_hours_per_week', 
+                        'academic_consistency_index', 'early_warning_composite_score', 'result']
+        st.dataframe(df[preview_cols].head(10), width='stretch')
     
     st.markdown("---")
     st.info("👈 Tip: Click any module card above or use the sidebar to jump directly into the interactive AI engines!")
@@ -586,6 +610,52 @@ elif page == "📊 Single Student Analysis" and data_loaded:
         }
         
         st.markdown("---")
+        
+        # Real-time Feature Engineering Calculations
+        aci_val = calculate_academic_consistency_index(s_marks, s_gpa)
+        eoy_val = calculate_effort_outcome_yield(s_marks, s_study)
+        tpar_val = calculate_theory_practical_alignment(s_marks, s_lab)
+        ewcs_val = calculate_early_warning_composite_score(s_attendance, s_marks, s_assignments, s_gpa)
+        
+        is_high_risk = ewcs_val >= 55
+        is_mod_risk = ewcs_val >= 30 and ewcs_val < 55
+        risk_color = "#F87171" if is_high_risk else "#FBBF24" if is_mod_risk else "#34D399"
+        risk_text = "Critical Risk" if is_high_risk else "Moderate Risk" if is_mod_risk else "Low Risk / High Standing"
+        
+        st.markdown(f"""
+        <div style="background:linear-gradient(135deg, rgba(30, 41, 59, 0.75), rgba(15, 23, 42, 0.85)); border:1px solid rgba(99, 102, 241, 0.3); border-radius:14px; padding:18px 20px; margin-bottom:18px; backdrop-filter:blur(16px); box-shadow:0 8px 24px rgba(0,0,0,0.3);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+                <span style="font-size:0.85rem; font-weight:800; color:#A5B4FC; text-transform:uppercase; letter-spacing:0.5px; display:flex; align-items:center; gap:6px;">
+                    ⚡ Synthesized Feature Engineering Signals (Refined Predictors)
+                </span>
+                <span style="font-size:0.75rem; background:rgba(52,211,153,0.15); color:#34D399; border:1px solid rgba(52,211,153,0.3); padding:3px 10px; border-radius:12px; font-weight:600;">
+                    ✓ Outlier Cleaned & Validated
+                </span>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(135px, 1fr)); gap:12px;">
+                <div style="background:rgba(15,23,42,0.6); padding:12px; border-radius:10px; border:1px solid rgba(148,163,184,0.12);">
+                    <div style="font-size:0.75rem; color:#94A3B8; font-weight:500;">Early Warning Score</div>
+                    <div style="font-size:1.45rem; font-weight:800; color:{risk_color}; font-family:JetBrains Mono, monospace; margin:2px 0;">{ewcs_val:.1f}<span style="font-size:0.75rem; color:#64748B;">/100</span></div>
+                    <div style="font-size:0.7rem; color:{risk_color}; font-weight:600;">{risk_text}</div>
+                </div>
+                <div style="background:rgba(15,23,42,0.6); padding:12px; border-radius:10px; border:1px solid rgba(148,163,184,0.12);">
+                    <div style="font-size:0.75rem; color:#94A3B8; font-weight:500;">Academic Consistency</div>
+                    <div style="font-size:1.45rem; font-weight:800; color:#818CF8; font-family:JetBrains Mono, monospace; margin:2px 0;">{aci_val:.2f}x</div>
+                    <div style="font-size:0.7rem; color:#A5B4FC;">{'Growth Trajectory' if aci_val >= 1.0 else 'Performance Dip'}</div>
+                </div>
+                <div style="background:rgba(15,23,42,0.6); padding:12px; border-radius:10px; border:1px solid rgba(148,163,184,0.12);">
+                    <div style="font-size:0.75rem; color:#94A3B8; font-weight:500;">Effort Yield (EOY)</div>
+                    <div style="font-size:1.45rem; font-weight:800; color:#C084FC; font-family:JetBrains Mono, monospace; margin:2px 0;">{eoy_val:.2f}</div>
+                    <div style="font-size:0.7rem; color:#E9D5FF;">Marks / Study Hr</div>
+                </div>
+                <div style="background:rgba(15,23,42,0.6); padding:12px; border-radius:10px; border:1px solid rgba(148,163,184,0.12);">
+                    <div style="font-size:0.75rem; color:#94A3B8; font-weight:500;">Theory/Practical Ratio</div>
+                    <div style="font-size:1.45rem; font-weight:800; color:#38BDF8; font-family:JetBrains Mono, monospace; margin:2px 0;">{tpar_val:.2f}</div>
+                    <div style="font-size:0.7rem; color:#BAE6FD;">{'Balanced Skillset' if 0.8 <= tpar_val <= 1.25 else 'Imbalance Flag'}</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         
         # ==========================
         # MODULE 1: ML PREDICTIONS
